@@ -1,0 +1,431 @@
+#include<graphics.h>
+#include<conio.h>
+#include<stdio.h>
+#include<dos.h>
+#include<process.h>
+
+void drawObstacle();
+void drawWorld();
+void drawPlayer();
+void movePlayer(int &,int &);
+void reposition(int &,int &);
+
+int main()
+{
+int gd=DETECT,gm;
+
+initgraph(&gd,&gm,"C:\\TurboC++\\Disk\\TurboC3\\BGI");
+
+drawWorld();
+drawPlayer();
+drawObstacle();
+
+getch();
+closegraph();
+return 0;
+}
+
+void drawWorld()
+{
+int *b;
+//bricks
+setcolor(6);
+setfillstyle(1,6);
+rectangle(0,370,40,415);
+rectangle(8,378,32,407);
+line(0,370,8,378);
+line(0,415,8,407);
+line(32,378,40,370);
+line(32,407,40,415);
+floodfill(10,375,6);
+floodfill(5,385,6);
+floodfill(15,385,6);
+setcolor(0);
+rectangle(8,378,32,407);
+line(0,370,8,378);
+
+//bricks line 2nd
+setcolor(6);
+setfillstyle(1,6);
+rectangle(0,415,40,460);
+rectangle(8,423,32,452);
+line(0,415,8,423);
+line(0,460,8,452);
+line(32,423,40,415);
+line(32,452,40,460);
+floodfill(10,420,6);
+floodfill(5,430,6);
+floodfill(15,430,6);
+setcolor(0);
+rectangle(8,423,32,452);
+line(0,415,8,423);
+setcolor(6);
+rectangle(0,370,40,460);
+getimage(0,370,40,460,b);
+for(int i=40;i<=700;i=i+40)
+{
+putimage(i,370,b,COPY_PUT);
+}
+setcolor(4);
+setfillstyle(1,9);
+rectangle(0,0,600,370);
+floodfill(150,100,4);
+
+////////// break walls
+setcolor(6);
+setfillstyle(1,6);
+rectangle(130,190,170,235);
+floodfill(132,200,6);
+
+//Small Bricks
+//first line
+setcolor(0);
+setfillstyle(1,8);
+rectangle(130,190,143,199);
+floodfill(132,192,0);
+setfillstyle(1,8);
+rectangle(145,190,158,199);
+floodfill(147,192,0);
+setfillstyle(1,8);
+rectangle(160,190,170,199);
+floodfill(162,192,0);
+
+//second line
+setfillstyle(1,8);
+rectangle(130,202,138,211);
+floodfill(132,205,0);
+setfillstyle(1,8);
+rectangle(140,202,155,211);
+floodfill(142,204,0);
+setfillstyle(1,8);
+rectangle(157,202,170,211);
+floodfill(159,204,0);
+
+//thrd line
+setfillstyle(1,8);
+rectangle(130,214,143,223);
+floodfill(132,216,0);
+setfillstyle(1,8);
+rectangle(145,214,158,223);
+floodfill(147,216,0);
+setfillstyle(1,8);
+rectangle(160,214,170,223);
+floodfill(162,216,0);
+
+//4th line
+
+setfillstyle(1,8);
+rectangle(130,226,138,235);
+floodfill(132,228,0);
+setfillstyle(1,8);
+rectangle(140,226,155,235);
+floodfill(142,228,0);
+setfillstyle(1,8);
+rectangle(157,226,170,235);
+floodfill(159,228,0);
+
+/////////////////////////////
+///////////// clouds
+setcolor(15);
+setfillstyle(1,15);
+arc(40,43,40,180,10);
+arc(25,50,60,180,10);
+arc(14,60,90,270,9);
+arc(25,65,180,330,10);
+arc(42,65,210,360,10);
+arc(57,60,240,20,10);
+arc(55,40,0,180,9);
+arc(69,50,250,120,10);
+floodfill(50,55,15);
+ellipse(78,70,0,360,10,3);
+floodfill(80,71,15);
+ellipse(89,80,0,360,8,2);
+floodfill(91,81,15);
+
+//cloud 2
+setfillstyle(1,15);
+arc(450,43,40,180,10);
+arc(435,50,60,180,10);
+arc(424,60,90,270,9);
+arc(435,65,180,330,10);
+arc(452,65,210,360,10);
+arc(467,60,240,20,10);
+arc(465,40,0,180,9);
+arc(479,50,250,120,10);
+floodfill(455,55,15);
+ellipse(488,70,0,360,10,3);
+floodfill(490,71,15);
+ellipse(499,80,0,360,8,2);
+floodfill(500,81,15);
+
+////////////////////////////////
+//////grash
+setcolor(2);
+setfillstyle(1,10);
+arc(26,355,40,180,5);
+arc(20,359,60,180,5);
+arc(14,365,90,270,5);
+arc(34,349,30,200,5);
+arc(38,340,90,270,5);
+arc(44,335,340,220,5);
+arc(53,340,0,150,5);
+arc(60,345,320,120,5);
+arc(63,354,360,100,5);
+arc(70,359,350,140,5);
+arc(14,365,90,270,5);
+arc(75,365,320,120,5);
+line(10,370,80,370);
+floodfill(50,350,2);
+
+
+}
+
+
+void drawObstacle()
+{
+  static int score=1;//This is the score of the player
+  static int x=300,j=345;//x and j are the initial coordinates of the ball
+
+ while(!kbhit())
+ {
+/* char play;//Play button
+ if(play=='w')
+ {
+  static int speed=2;//Increases the speed as the level increases
+ circle(i
+  for(int i=0;i<=50;i++)
+     {
+     }
+ }*/
+
+ for(int i=0;i<=555;i++)
+ {
+
+//The box in which highscore is stored so that it can be cleared
+//and rewritten
+setcolor(7);
+bar(0,0,100,7);
+setfillstyle(SOLID_FILL,7);
+
+ char displayscore[20];
+ sprintf(displayscore,"Your Score %d",score);//used to store score variable
+ outtextxy(0,0,displayscore); //used to display score variable
+    if( kbhit())
+      {/*
+       static up=1;
+       //used as a variable to determine the position of the
+       // object the player controls
+       char move=getch();
+       if(move==72)//this means up
+       {
+      // circle(100,345,20);
+      // floodfill(100,345,9);
+       circle(100,345-(20*i),20);
+       //floodfill(100,345-20,2);
+       //continue;
+       up++;
+       }
+       if(move==27)//if player presses esc the program exits
+       exit(0);
+      // continue;*/
+      movePlayer(x,j);
+      }
+  //moving obstacle
+setcolor(6);
+setfillstyle(1,6);
+rectangle(555-i,320,595-i,365);
+floodfill(557-i,330,6);
+
+//First Line
+setcolor(0);
+setfillstyle(1,8);
+rectangle(555-i,320,568-i,329);
+floodfill(557-i,322,0);
+setfillstyle(1,8);
+rectangle(570-i,320,583-i,329);
+floodfill(572-i,322,0);
+setfillstyle(1,8);
+rectangle(585-i,320,595-i,329);
+floodfill(587-i,322,0);
+
+//Second Line
+setfillstyle(1,8);
+rectangle(555-i,332,563-i,341);
+floodfill(557-i,335,0);
+setfillstyle(1,8);
+rectangle(565-i,332,580-i,341);
+floodfill(567-i,334,0);
+setfillstyle(1,8);
+rectangle(582-i,332,595-i,341);
+floodfill(584-i,334,0);
+
+//Third Line
+setfillstyle(1,8);
+rectangle(555-i,344,568-i,353);
+floodfill(557-i,346,0);
+setfillstyle(1,8);
+rectangle(570-i,344,583-i,353);
+floodfill(572-i,346,0);
+setfillstyle(1,8);
+rectangle(585-i,344,595-i,353);
+floodfill(587-i,346,0);
+
+//Fourth Line
+setfillstyle(1,8);
+rectangle(555-i,356,563-i,365);
+floodfill(557-i,358,0);
+setfillstyle(1,8);
+rectangle(565-i,356,580-i,365);
+floodfill(567-i,358,0);
+setfillstyle(1,8);
+rectangle(582-i,356,595-i,365);
+floodfill(584-i,358,0);
+
+
+
+if(i<555)
+{
+setcolor(9);
+rectangle(555-i,320,595-i,365);
+delay(0);
+setcolor(2);
+// rectangle(500,308,600,368);
+   }
+/*if(i==556)
+    {
+    setcolor(9);
+    rectangle(0,320,40,365);
+    setfillstyle(SOLID_FILL,9);
+    }*/
+ }
+
+  score ++;
+  reposition(x,j);
+ }
+
+}
+
+void drawPlayer()
+{
+//circle(100,345,20);
+//floodfill(100,345,2);
+setcolor(2);
+circle(300,345,20);
+setfillstyle(SOLID_FILL,2);
+floodfill(300,345,2);
+
+}
+
+void movePlayer(int &i,int &j)
+{
+//static int i=300,j=345;//i and j are the initial coordinates of the ball
+static int x=0,y=0,movem;//x and y are used for changing the coordinates
+			 //during movement
+      movem=getch();//Stores the key pressed by the player
+      if(movem==72) // For Moving up
+	{
+	   if(j<=285)//used to avoid the ball from going too high
+	    {
+	    y=0;
+	   /* setcolor(9);
+	    circle(i,j,20);
+	    setfillstyle(SOLID_FILL,9);
+	    floodfill(i,j,9); */
+
+	    }
+	  else
+	  {
+	  x=0;
+	  y=-1;
+	  }
+	}
+
+	if(movem==75) //For Moving left
+	{
+	  if(i<=100)
+	  {
+	  x=0;
+	 /* setcolor(9);
+	  circle(i,j,20);
+	  setfillstyle(SOLID_FILL,9);
+	  floodfill(i,j,9);*/
+
+	  }
+	  else
+	  {
+	  x=-1; y=0;
+	  }
+	}
+
+	if(movem==77) //For Moving Right
+	{
+	  if(i>=540)
+	  {
+	  x=0;
+	  }
+	  else
+	  {
+	   x=1; y=0;
+	   }
+	}
+
+	if(movem==80)  //For Moving down
+	{
+
+		if(j>=345) //To avoid it from going down into the block
+		{
+		      /* setcolor(9);
+		       circle(i,j,20);
+		       setfillstyle(SOLID_FILL,9);
+		       floodfill(i,j,9); */
+		      j=345; y=0;
+		}
+
+		else
+		{
+		x=0;
+		y=1;
+		}
+	}
+
+	if(movem==27) //For using <ESC> key to exit
+	{
+	exit(0);
+
+	}
+	// Used to draw a circle similar to the background
+	// as a means of clearing the screen
+      setcolor(9);
+      circle(i,j,20);
+      setfillstyle(SOLID_FILL,9);
+      floodfill(i,j,9);
+
+      //The new position is set below
+      i=i+40*x;
+      j=j+40*y;
+      setcolor(2);
+      circle(i,j,20);
+      setfillstyle(SOLID_FILL,2);
+      floodfill(i,j,2);
+
+  }
+
+ void reposition(int &i,int &j)
+{
+//This function redraws the ball to the inital postion to make
+// the game more challenging
+//It takes the position parameter so that it can clear the ball and
+//redraw it
+setcolor(9);
+circle(i,j,20);
+setfillstyle(SOLID_FILL,9);
+floodfill(i,j,9);
+i=300,j=345;//to set it to its initial coordinates
+
+//To redraw the ball at its initial coordinate
+setcolor(2);
+circle(i,j,20);
+setfillstyle(SOLID_FILL,2);
+floodfill(i,j,2);
+
+ }

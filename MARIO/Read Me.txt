@@ -1,0 +1,8 @@
+The Game works by accepting a key from the user where if pressed the up key the ball jumps upto a certain height
+then comes down again.You can also press the <ESC> key to terminate the application.
+NOTE
+Step 1.Please copy this code into the BIN folder of turbo or follow step 2.
+Step 2.Please add the file EGAVGA.bgi from the BGI folder to the BIN folder or change the absolute path of the BGI folder in
+the code.
+DONE BY 
+IYOSSIAS GETACHEW
